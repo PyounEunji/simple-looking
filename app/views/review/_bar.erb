@@ -1,0 +1,214 @@
+<style type="text/css">
+  .medium-right-margin{
+  line-height: 76px;
+  height: 56px;
+  color:white;
+  }
+  .navbar-default {
+  	background-color: transparent;
+  	border: none;
+  	padding-bottom:20px;
+  }
+  
+  .navbar-default .navbar-brand {
+  	color: white;
+  }
+  .navbar-default .navbar-nav>li>a,
+  .navbar-default .navbar-nav>li>a:focus,
+  .navbar-default .navbar-nav>li>a:hover {
+  	background-color: transparent;
+  	color: white;
+  }
+  .navbar-default .navbar-nav>.active>a,
+  .navbar-default .navbar-nav>.active>a:focus,
+  .navbar-default .navbar-nav>.active>a:hover {
+  	background-color: transparent;
+  	color: white;
+  }
+    
+    .animate {
+    	-webkit-transition: all 0.5s ease-in-out;
+    	-moz-transition: all 0.5s ease-in-out;
+    	-o-transition: all 0.5s ease-in-out;
+    	-ms-transition: all 0.5s ease-in-out;
+    	transition: all 0.5s ease-in-out;
+    }
+    
+    .nav-controller {
+        position: fixed;
+        top: 15px;
+        right: 15px;
+        padding: 5px 6px 1px;
+        border: 5px solid rgb(51, 51, 51);
+        color: rgb(51, 51, 51);
+        border-radius: 25px;
+        font-size: 12pt;
+        cursor: pointer;
+        z-index: 300;
+    }
+    
+    nav ~ .nav-controller > .controller-open {
+        display: inline-block;
+    }
+    
+    nav ~ .nav-controller > .controller-close {
+        display: none;
+    }
+    nav.focus ~ .nav-controller > .controller-open {
+        display: none;
+    }
+    
+    nav.focus ~ .nav-controller > .controller-close {
+        display: inline-block;
+    }
+    
+    .animate {
+        position: fixed;
+        top: 0px;
+        right: -100%;
+        padding-top: 65px;
+        padding-bottom: 15px;
+        height: 100%;
+        max-width: 200px;
+        background-color: rgb(255, 255, 255);
+        box-shadow: -3px 0px 3px 0px rgba(160, 160, 160, 0.30);
+        z-index: 100;    
+        overflow: auto;
+    }
+    
+    nav.focus {
+        right: 0px;
+    }
+    
+    nav > .divider {
+        content: '';
+        border-bottom: 1px solid rgb(230, 230, 230);
+        max-height: 1px;
+        overflow: hidden;
+        margin: 15px 0px;
+    }
+    
+    nav > h4,
+    nav > p,
+    nav > ul {
+        padding: 0px 10px;
+    }
+    
+    nav > h4 {
+        font-family: 'Anton', sans-serif;
+    }
+    
+    nav > ul {
+        list-style: none;
+    }
+    nav > ul > li {
+        margin: 5px 0px;   
+    }
+    nav > ul > li > a {
+        color: rgb(190, 190, 190);   
+    }
+    nav > ul > li > a:hover {
+        font-size: 1.1em;
+        font-weight: 700;
+        color: rgb(51, 51, 51);
+        text-decoration: none;
+    }
+        
+  
+#panel, #flip {
+    padding: 5px;
+    text-align: center;
+    background-color: #e5eecc;
+    border: solid 1px #c3c3c3;
+  }
+
+#panel {
+    padding: 20px;
+    display: none;
+  }
+#search_button {
+   
+  }
+</style>
+
+<body>
+<script> 
+/*
+$(document).ready(function(){
+
+var availableTags;
+//후에 데이터 베이스로 바꿀 것.
+
+$( "#search_" ).autocomplete({  //id tag 인 부분에서 auto complete로 미리보기 
+  source: availableTags 
+});
+
+$.ui.autocomplete.filter = function (array, term) {
+  var matcher = new RegExp("^" + $.ui.autocomplete.escapeRegex(term), "i");
+  return $.grep(array, function (value) {
+    return matcher.test(value.label || value.value || value); //첫 글자 겹치는 순으로
+          });
+        };
+    });
+});
+*/
+
+$(function() {
+    $('nav, .nav-controller').on('click', function(event) {
+        $('nav').toggleClass('focus');
+    });
+    $('nav, .nav-controller').on('mouseover', function(event) {
+        $('nav').addClass('focus');
+    }).on('mouseout', function(event) {
+        $('nav').removeClass('focus');
+    })
+})
+</script>
+
+<nav class="navbar navbar-default navbar-fixed-top" style="margin-bottom:100px;">
+		<div class="container-fluid">
+          <div class="col-lg-2 col-md-2">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">Simple Looking</a></div>
+		   </div>
+		   
+		   <div class="col-lg-2 col-md-2">
+                <div class="nav-controller">
+            <span class="glyphicon glyphicon-list"></span>
+            <span class="[ glyphicon glyphicon-remove ] controller-close"></span>
+        </div>
+      </div>
+      <div class="search_engine">
+        <div class="row">
+          <div class="col-lg-6 col-md-6">
+            <div class="input-group" id="search_down">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button" id ="search_button" name="searchbutton_">Search</button>
+              </span>
+                  <input type="text" class="form-control" placeholder="#태그">
+                    </div>
+                  </div>
+              </div>
+		    </div>
+	    </div><!-- /.container-fluid -->
+	</nav>
+	
+	<nav class="animate"> 
+	<p>Mouse0270 created this snippet on <strong>Bootsnipp</strong> network.</p>
+	    <%if current_user%>  
+        로그인되어있습니다.
+        <%= current_user.nickname %> 님
+            <a class="btn btn-lg btn-primary" href="/users/sign_out">로그아웃</a>
+        <%= current_user.email%><br>
+        	<form action="/review/read" method="post">
+                  <button type="submit" class="btn btn-primary btn-lg">
+                    리뷰쓰기
+                  </button>
+             </form>
+		<%end%>
+    </nav>
+</body>
+
+
+
+

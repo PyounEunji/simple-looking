@@ -1,0 +1,40 @@
+
+<body>
+<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#clNav" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Simple Looking</a>
+			</div>
+			
+			<div>
+			<ul class="nav pull-right logged-out list-unstyled medium-right-margin">
+				<%if user_signed_in?%>
+				    <%= current_user.nickname%>
+				    <a class="btn btn-default"href="/users/sign_out">로그아웃하기</a>
+				<%else%>
+
+				  	<a class="btn btn-default" href="/users/sign_in">로그인</a>
+				   	<a class="btn btn-default" href="/users/sign_up">가입하기</a>
+
+				<%end%>
+			</ul>
+		  </div><!-- /.container-fluid -->
+	</div>	  
+</nav>
+	
+	
+<div class="jumbotron" style="background-image: url('simple_looking_page.PNG');">
+	<div class="col-md-6"></div>
+	<div class="col-md-6">
+	
+	</div>
+</div>
+
+</body>

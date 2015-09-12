@@ -1,0 +1,41 @@
+<script>
+ $(window).scroll(function() {  
+        $('#picture_controller').animate({top:$(window).scrollTop()+"px" },{queue: false, duration: 350});    
+    });  
+    $('#picture_controller').click(function() {  
+        $('#picture_controller').animate({ top:"+=15px",opacity:0 }, "slow");  
+    });
+</script>
+<style type="text/css">
+.picture_controller{
+	position:relative;
+	float:right;
+	width:auto;
+}
+.scrollingBox{
+	position:absolute;
+	top:0px;
+	right:0px;
+
+}
+.scrollingBox_image_{
+	width:300px;
+	height:auto;
+}
+</style>
+<div class="picture_controller" id="picture_controller">
+	<div class="scrollingBox">
+		<h3>A Big Heading Text</h3>
+		<img class="scrollingBox_image_" src="http://media.catmoji.com/post/ctl3/little-cat.jpg" alt="inside the scrolling box"> <!-- 후에 수정-->
+		<br /><br />
+		<p>Some text inside the scrolling box</p>
+	</div>
+	<br />
+</div>
+<%= simple_form_for @balloon do |f| %>
+  <%= f.input :color, as: :minicolors %>
+<% end %>
+<%= simple_form_for @balloon do |f| %>
+  <%= f.input :color, as: :minicolors, input_html: {data: {
+          minicolors: {theme: :bootstrap, position: :right}}} %>
+<% end %>

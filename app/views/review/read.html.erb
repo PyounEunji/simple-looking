@@ -1,0 +1,35 @@
+<body>
+<style type="text/css">
+  .form-control{
+    max-height: 350px;
+    min-height: 350px;
+    background: #f4f4f4;
+    display: block;
+    max-width: 50%;
+    min-width: 50%;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+</style>
+<center>
+  <div class="row">
+    <div class="col-lg-12 text-center v-center">
+      <h1>리뷰작성하기</h1>
+      <br>
+        <form class="col-lg-12" action="/review/write" enctype="multipart/form-data" method = "POST">
+          <div class="input-group input-group-lg col-sm-offset-4 col-sm-4">
+                <%if user_signed_in?%>
+                <%= current_user.nickname%> 님
+                PW: <input type="password" name="p_password">
+                <% end %>
+            <input type="file" name="image_file">
+            <input class="btn btn-default" type="submit" value="Submit">
+        </form>
+      </div>
+    </div>
+  </div>
+</center>
+</body>
