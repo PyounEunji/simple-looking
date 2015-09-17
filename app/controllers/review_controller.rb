@@ -9,13 +9,13 @@ require 'RMagick'
        u.save
      else
       redirect_to "/"
-    end 
+     end 
   end
   
   def read
     @post = Post.all
-    
   end
+  
   def write
     @post = Post.all
     new_post = Post.new
@@ -25,6 +25,11 @@ require 'RMagick'
     new_post.save
     redirect_to "/review/custom_image_write"
   end
+  
+  def _slidebox
+    @posts = Post.all
+  end
+  
   def custom_image_write
     @posts = Post.all
     if params[:tag]
@@ -33,6 +38,17 @@ require 'RMagick'
       @posts = Post.all
     end
   end
+  
+  def save_text
+    @posts = Post.all
+    @post.p_text = params[:textdata]
+    @post.p_text_color = params[:colorpickerField1]
+    @post.p_highlight = params[:colorpickerField2]
+    @post.save
+    
+    render :text => ""
+  end
+  
   def write_reply
     new_reply = Reply.new
     new_reply.post_id = params[:p_id]
@@ -40,9 +56,7 @@ require 'RMagick'
     new_reply.save
     redirect_to "/"
   end
-  def delete_confirm
-    @p_id = params[:id]
-  end
+
   def delete
     @selected_post = Post.find(params[:id])
     confirm_password = Digest::SHA256.hexdigest params[:p_password]

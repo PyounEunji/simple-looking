@@ -18,8 +18,11 @@ ActiveRecord::Schema.define(version: 20150910150501) do
     t.string   "p_password"
     t.string   "p_content"
     t.string   "p_image"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "p_text"
+    t.integer  "p_textcolor"
+    t.integer  "p_highlight"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "replies", force: :cascade do |t|

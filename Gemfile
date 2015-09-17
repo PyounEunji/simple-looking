@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'jquery-minicolors-rails'
+
 gem 'rmagick'
 gem 'mini_magick'
 gem 'fog'

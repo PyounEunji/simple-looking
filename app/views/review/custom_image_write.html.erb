@@ -1,13 +1,21 @@
-<%= render :partial=> "review/slidebox" %> 
-<body>
+<%= render :partial => 'review/slidebox' %>
+<style>
 
-<h1>image_custom_system</h1>
+.image{
+    width:500;
+    height:auto;
+ }
+</style>
 
-<div>
-  <% @posts.each do |p| %>
-    <img src="<%=p.p_image.url%>"><br>
-  <%end%>
+<div class="header" style="text-align:center;">
+    <h1>image_custom_system</h1>
+</div>
+<% @posts.each do |p| %>
+    <div class = "picture_data">
+        <img src="<%=p.p_image.url%>" style="width:500px;"><br /><br />
+    </div>
+<%end%>
+
+<div id="post_div">
 </div>
 
-</body>
- 
