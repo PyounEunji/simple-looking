@@ -11,11 +11,9 @@ require 'RMagick'
       redirect_to "/"
      end 
   end
-  
   def read
     @post = Post.all
   end
-  
   def write
     @post = Post.all
     new_post = Post.new
@@ -25,14 +23,10 @@ require 'RMagick'
     new_post.save
     redirect_to "/review/custom_image_write"
   end
-  
-  def _slidebox
-    @posts = Post.all
-  end
-  
+
   def custom_image_write
     @posts = Post.all
-    if params[:tag]
+    if params[:tag] #tag 부분
       @posts = Post.tagged_with(params[:tag])
     else
       @posts = Post.all
@@ -40,13 +34,12 @@ require 'RMagick'
   end
   
   def save_text
-    @posts = Post.all
-    @post.p_text = params[:textdata]
+    @post = Post.all
+    @post.p_text = params[:submit_text]  #39~41 _slidebox 입력 데이터 받아옴
     @post.p_text_color = params[:colorpickerField1]
     @post.p_highlight = params[:colorpickerField2]
     @post.save
     
-    render :text => ""
   end
   
   def write_reply
@@ -56,7 +49,6 @@ require 'RMagick'
     new_reply.save
     redirect_to "/"
   end
-
   def delete
     @selected_post = Post.find(params[:id])
     confirm_password = Digest::SHA256.hexdigest params[:p_password]

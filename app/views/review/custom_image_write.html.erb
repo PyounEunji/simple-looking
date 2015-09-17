@@ -1,15 +1,89 @@
-<%= render :partial => 'review/slidebox' %>
-<style>
+<script>
+$(window).scroll(function() {  
+    $('#picture_controller').animate({top:$(window).scrollTop()+"px" },{queue: false, duration: 350});    
+	});  
+	$('#picture_controller').click(function() {  
+    $('#picture_controller').animate({ top:"+=15px",opacity:0 }, "slow");  
+});
 
+$('#multiForm').click(
+	function(){ //textdata의 값을 받아옴
+	  var formData = $("multiForm").serialize();
+		 $.ajax({ 
+		 	data: { p_text: $('#submit_text').val(),
+		 			p_highlight:  $('#colorpickerField1').val(),
+		 			p_text_color: $('#colorpickerField2').val()
+		 		  },
+		    url: 'review/save_text', //
+		    type: 'POST',  //post type 으로 데이터 전송
+		     data : formData,
+		    success: function(data){
+		 		var text_data = $('#submit_text').val();
+		    	var color_data = $('#colorpickerField1').val();
+		    	var highlight_data = $('#colorpickerField2').val();
+				$('#post_div').append("<p>" + text_data + "<p>");
+			    $('#submit_text').focus();
+		    }
+		});
+	});
+</script>
+
+<style>
 .image{
     width:500;
     height:auto;
  }
+
+.picture_controller{
+	position:relative;
+	float:right;
+	width:auto;
+}
+.scrollingBox{
+	position:absolute;
+	top:0px;
+	right:0px;
+}
+.scrollingBox_color_{
+	width:300px;
+	height:auto;
+}
+.header{
+  
+    width:700;
+}
+
+.picture_data{
+    
+}
+
 </style>
 
-<div class="header" style="text-align:center;">
-    <h1>image_custom_system</h1>
+<div class="picture_controller" id="picture_controller">
+    <div class="col-md-4">
+		<div class="scrollingBox">
+			<h3 style="text-align:center;">PICTURE CONTROLLER</h3>
+			  <p>이미지에 넣을 텍스트의 위치와 사이즈, 색상 및 글씨 배경색을 설정해주세요.</p>			 
+			    <div class="scrollingBox_color_">
+			    	<form action:"" method="Post" id="multiForm">
+	 					 <div class="form-group">
+			 				 Text: <input type="text" class="form-control" id = "submit_text">
+			   				 Text color: <input type="text" class="form-control" maxlength="6" size="6" id="colorpickerField1" value="000000">
+			       		     Highlighting text: <input type="text" class="form-control" maxlength="6" size="6" id="colorpickerField2" value="000000">
+	 					 
+		 					 <br />
+		  			    	<button type="submit" class="btn btn-default" id="submit_button">텍스트적용</button>
+		  			    	<button type="submit" class="btn btn-default" id="submit_button_entire">Submit</button>
+					</div></form>
+					<div id="post_div">
+					</div>
+	             <br /><br />
+	         </div>
+		</div>
+	<br />
 </div>
+</div>
+
 <% @posts.each do |p| %>
     <div class = "picture_data">
         <img src="<%=p.p_image.url%>" style="width:500px;"><br /><br />
@@ -18,4 +92,10 @@
 
 <div id="post_div">
 </div>
+
+
+ 
+
+
+
 
